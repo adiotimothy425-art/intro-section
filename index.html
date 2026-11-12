@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Intro section with dropdown navigation</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <!-- 
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gray: {
+              50: "#fafafa",  // hsl(0, 0%, 98%)
+              500: "#696969", // hsl(0, 0%, 41%)
+              950: "#141414", // hsl(0, 0%, 8%)
+            },
+          },
+          fontFamily: {
+            epilogue: ["Epilogue", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script> -->
+
+  <body
+    class="min-h-screen bg-gray-50 font-epilogue font-medium text-gray-500 antialiased"
+  >
+    <!-- ================= HEADER ================= -->
+    <header
+      class="flex items-center justify-between px-4 py-5 md:px-10 md:py-5"
+    >
+      <div class="flex items-center">
+        <a href="#" class="shrink-0" aria-label="Snap home">
+          <img src="./images/logo.svg"
+           alt="" />
+        </a>
+
+        <!-- Desktop navigation -->
+        <nav class="ml-[46px] hidden md:block" aria-label="Main">
+          <ul class="flex items-center gap-10 text-[15px]">
+            <li class="relative" data-dropdown>
+              <button
+                type="button"
+                data-toggle
+                aria-expanded="false"
+                aria-controls="features-menu"
+                class="flex items-center gap-2 transition-colors hover:text-gray-950"
+              >
+                Features
+                <img
+                  src="./images/icon-arrow-down.svg"
+                  alt=""
+                  data-arrow
+                  class="transition-transform duration-200"
+                />
+              </button>
+              <ul
+                id="features-menu"
+                class="absolute right-0 top-full mt-[18px] hidden w-max space-y-2 rounded-lg bg-white p-6 shadow-[0_10px_30px_rgba(0,0,0,0.1)]"
+              >
+                <li>
+                  <a
+                    href="#"
+                    class="flex items-center gap-4 whitespace-nowrap transition-colors hover:text-gray-950"
+                    ><img
+                      src="images/icon-todo.svg"
+                      alt=""
+                      class="size-4"
+                    />Todo List</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="flex items-center gap-4 whitespace-nowrap transition-colors hover:text-gray-950"
+                    ><img
+                      src="images/icon-calendar.svg"
+                      alt=""
+                      class="size-4"
+                    />Calendar</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="flex items-center gap-4 whitespace-nowrap transition-colors hover:text-gray-950"
+                    ><img
+                      src="images/icon-reminders.svg"
+                      alt=""
+                      class="size-4"
+                    />Reminders</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="flex items-center gap-4 whitespace-nowrap transition-colors hover:text-gray-950"
+                    ><img
+                      src="images/icon-planning.svg"
+                      alt=""
+                      class="size-4"
+                    />Planning</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="relative" data-dropdown>
+              <button
+                type="button"
+                data-toggle
+                aria-expanded="false"
+                aria-controls="company-menu"
+                class="flex items-center gap-2 transition-colors hover:text-gray-950"
+              >
+                Company
+                <img
+                  src="images/icon-arrow-down.svg"
+                  alt=""
+                  data-arrow
+                  class="transition-transform duration-200"
+                />
+              </button>
+              <ul
+                id="company-menu"
+                class="absolute left-0 top-full mt-[18px] hidden w-max space-y-2 rounded-lg bg-white p-6 shadow-[0_10px_30px_rgba(0,0,0,0.1)]"
+              >
+                <li>
+                  <a
+                    href="#"
+                    class="block whitespace-nowrap pr-1 transition-colors hover:text-gray-950"
+                    >History</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block whitespace-nowrap pr-1 transition-colors hover:text-gray-950"
+                    >Our Team</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block whitespace-nowrap pr-1 transition-colors hover:text-gray-950"
+                    >Blog</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#" class="transition-colors hover:text-gray-950"
+                >Careers</a
+              >
+            </li>
+            <li>
+              <a href="#" class="transition-colors hover:text-gray-950"
+                >About</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Desktop login / register -->
+      <div class="hidden items-center gap-6 text-[15px] md:flex">
+        <a href="#" class="transition-colors hover:text-gray-950">Login</a>
+        <a
+          href="#"
+          class="rounded-2xl border border-gray-500 px-[22px] py-2.5 transition-colors hover:border-gray-950 hover:text-gray-950"
+          >Register</a
+        >
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button
+        type="button"
+        id="menu-open"
+        class="md:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <img src="./images/icon-menu.svg" alt="" />
+      </button>
+    </header>
+
+    <!-- ================= MOBILE MENU ================= -->
+    <div
+      id="overlay"
+      aria-hidden="true"
+      class="invisible fixed inset-0 z-40 bg-gray-950/60 opacity-0 transition-[opacity,visibility] duration-300 md:hidden"
+    ></div>
+
+    <aside
+      id="mobile-menu"
+      aria-label="Mobile menu"
+      class="invisible fixed inset-y-0 right-0 z-50 w-[64%] max-w-[320px] translate-x-full overflow-y-auto bg-white pb-10 transition-[transform,visibility] duration-300 md:hidden"
+    >
+      <div class="flex justify-end px-5 pt-5">
+        <button type="button" id="menu-close" aria-label="Close menu">
+          <img src="images/icon-close-menu.svg" alt="" />
+        </button>
+      </div>
+
+      <nav class="mt-[26px] pl-6 pr-5" aria-label="Mobile">
+        <ul class="space-y-[18px]">
+          <li>
+            <button
+              type="button"
+              data-toggle
+              aria-expanded="false"
+              aria-controls="m-features"
+              class="flex items-center gap-2 transition-colors hover:text-gray-950"
+            >
+              Features
+              <img
+                src="images/icon-arrow-down.svg"
+                alt=""
+                data-arrow
+                class="transition-transform duration-200"
+              />
+            </button>
+            <ul id="m-features" class="mt-[18px] hidden space-y-[18px] pl-6">
+              <li>
+                <a href="#" class="flex items-center gap-3 hover:text-gray-950"
+                  ><img src="images/icon-todo.svg" alt="" class="size-5" />Todo
+                  List</a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center gap-3 hover:text-gray-950"
+                  ><img
+                    src="images/icon-calendar.svg"
+                    alt=""
+                    class="size-5"
+                  />Calendar</a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center gap-3 hover:text-gray-950"
+                  ><img
+                    src="images/icon-reminders.svg"
+                    alt=""
+                    class="size-5"
+                  />Reminders</a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center gap-3 hover:text-gray-950"
+                  ><img
+                    src="images/icon-planning.svg"
+                    alt=""
+                    class="size-5"
+                  />Planning</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <button
+              type="button"
+              data-toggle
+              aria-expanded="false"
+              aria-controls="m-company"
+              class="flex items-center gap-2 transition-colors hover:text-gray-950"
+            >
+              Company
+              <img
+                src="images/icon-arrow-down.svg"
+                alt=""
+                data-arrow
+                class="transition-transform duration-200"
+              />
+            </button>
+            <ul id="m-company" class="mt-[18px] hidden space-y-[18px] pl-6">
+              <li><a href="#" class="block hover:text-gray-950">History</a></li>
+              <li>
+                <a href="#" class="block hover:text-gray-950">Our Team</a>
+              </li>
+              <li><a href="#" class="block hover:text-gray-950">Blog</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="block hover:text-gray-950">Careers</a></li>
+          <li><a href="#" class="block hover:text-gray-950">About</a></li>
+        </ul>
+
+        <div class="mt-6 flex flex-col items-center gap-5 text-sm">
+          <a href="#" class="hover:text-gray-950">Login</a>
+          <a
+            href="#"
+            class="w-full rounded-2xl border border-gray-500 py-2.5 text-center transition-colors hover:border-gray-950 hover:text-gray-950"
+            >Register</a
+          >
+        </div>
+      </nav>
+    </aside>
+
+    <!-- ================= HERO ================= -->
+    <main class="mx-auto max-w-[1180px] px-0 lg:px-6 xl:px-0">
+      <div
+        class="lg:grid lg:grid-cols-[1fr_400px] lg:gap-10 xl:grid-cols-[1fr_480px]"
+      >
+        <!-- Image (top on mobile, right on desktop) -->
+        <picture class="mx-auto block max-w-xl lg:order-2 lg:max-w-none">
+          <source
+            media="(min-width: 1024px)"
+            srcset="images/image-hero-desktop.png"
+          />
+          <img
+            src="images/image-hero-mobile.png"
+            alt="Man working on a laptop surrounded by geometric shapes"
+            class="w-full"
+          />
+        </picture>
+
+        <!-- Copy -->
+        <div
+          class="flex flex-col px-4 pb-12 pt-10 text-center lg:order-1 lg:justify-between lg:px-0 lg:pb-0 lg:pt-[100px] lg:text-left xl:pl-[35px]"
+        >
+          <div>
+            <h1
+              class="text-[40px] font-bold leading-[1.05] tracking-[-0.02em] text-gray-950 md:text-[56px] xl:text-[80px]"
+            >
+              Make <br class="hidden lg:block" />remote work
+            </h1>
+            <p
+              class="mx-auto mt-4 max-w-[440px] text-base leading-[1.6] md:text-lg lg:mx-0 lg:mt-[60px]"
+            >
+              Get your team in sync, no matter your location. Streamline
+              processes, create team rituals, and watch productivity soar.
+            </p>
+            <a
+              href="#"
+              class="mt-8 inline-block rounded-2xl border-2 border-gray-950 bg-gray-950 px-8 py-3 text-base font-bold text-white transition-colors hover:bg-transparent hover:text-gray-950 md:text-lg lg:mt-[44px]"
+            >
+              Learn more
+            </a>
+          </div>
+
+          <ul
+            class="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 lg:mt-16 lg:justify-start lg:gap-x-10"
+          >
+            <li>
+              <img
+                src="images/client-databiz.svg"
+                alt="Databiz"
+                class="h-4 w-auto lg:h-auto"
+              />
+            </li>
+            <li>
+              <img
+                src="images/client-audiophile.svg"
+                alt="Audiophile"
+                class="h-4 w-auto lg:h-auto"
+              />
+            </li>
+            <li>
+              <img
+                src="images/client-meet.svg"
+                alt="Meet"
+                class="h-4 w-auto lg:h-auto"
+              />
+            </li>
+            <li>
+              <img
+                src="images/client-maker.svg"
+                alt="Maker"
+                class="h-4 w-auto lg:h-auto"
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <script src="./main.js"></script>
+  </body>
+</html>

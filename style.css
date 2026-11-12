@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+/* font-family: "Epilogue", sans-serif; */
+:root{
+--Gray-50: hsl(0, 0%, 98%);
+--Gray-500: hsl(0, 0%, 41%);
+--Gray-950: hsl(0, 0%, 8%);
+}
